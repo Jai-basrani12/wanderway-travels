@@ -54,3 +54,36 @@ if ($conn->connect_error) {
 
 // Set UTF-8 encoding
 $conn->set_charset("utf8mb4");
+
+/**
+ * Helper function to resolve package image source.
+ * Returns URL as-is if it starts with http,
+ * otherwise BASE_URL . 'uploads/' . $image,
+ * and returns placeholder image path when empty.
+ */
+function imageSrc(?string $image): string {
+    $image = trim((string)$image);
+    if ($image === '') {
+        return BASE_URL . 'assets/img/placeholder.svg';
+    }
+    if (strpos($image, 'http://') === 0 || strpos($image, 'https://') === 0) {
+        return $image;
+    }
+    return BASE_URL . 'uploads/' . $image;
+}
+
+/**
+ * Safely delete a local file from uploads/ directory.
+ * Never unlinks full URLs.
+ */
+function deleteLocalImage(?string $image): void {
+    $image = trim((string)$image);
+    if ($image === '' || strpos($image, 'http://') === 0 || strpos($image, 'https://') === 0) {
+        return;
+    }
+    $filepath = dirname(__DIR__) . '/uploads/' . basename($image);
+    if (is_file($filepath) && file_exists($filepath)) {
+        @unlink($filepath);
+    }
+}
+
