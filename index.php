@@ -2,8 +2,9 @@
 // Include site configuration and database connection
 require_once __DIR__ . '/config/config.php';
 
-// Set page title
+// Set page title and SEO meta description
 $page_title = 'WanderWay Travels - Discover Beautiful Destinations';
+$meta_description = 'Discover extraordinary travel packages, scenic holiday escapes, and custom vacations worldwide with WanderWay Travels.';
 
 // Fetch 3 latest active packages from the database using a prepared statement
 $sql = "SELECT id, title, destination, price, days, description, image FROM packages WHERE is_active = ? ORDER BY id DESC LIMIT 3";

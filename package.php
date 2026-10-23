@@ -51,8 +51,9 @@ if (!$package) {
     exit;
 }
 
-// Set dynamic page title
-$page_title = htmlspecialchars($package['title']) . ' - WanderWay Travels';
+// Set dynamic page title and SEO meta description
+$page_title = htmlspecialchars($package['title']) . ' - ' . ($site_contact['name'] ?? 'WanderWay Travels');
+$meta_description = htmlspecialchars(mb_substr(strip_tags($package['description']), 0, 150)) . '... Explore with WanderWay Travels.';
 
 // Include common header
 require_once __DIR__ . '/includes/header.php';

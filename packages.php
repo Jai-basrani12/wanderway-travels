@@ -23,10 +23,13 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-// Page Title
+// Page Title and SEO Meta Description
 $page_title = ($search_term !== '') 
     ? 'Search: ' . htmlspecialchars($search_term) . ' - Tour Packages - WanderWay Travels' 
     : 'All Tour Packages - WanderWay Travels';
+$meta_description = ($search_term !== '') 
+    ? 'Browse holiday tour packages matching "' . htmlspecialchars($search_term) . '" with WanderWay Travels.' 
+    : 'Browse all active holiday tour packages, vacation getaways, and scenic itineraries with WanderWay Travels.';
 
 // Include common header
 require_once __DIR__ . '/includes/header.php';

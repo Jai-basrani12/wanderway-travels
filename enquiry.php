@@ -130,8 +130,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$is_sent) {
     }
 }
 
-// Page Title
-$page_title = 'Send An Enquiry - WanderWay Travels';
+// Page Title and SEO Meta Description
+$page_title = 'Send An Enquiry - ' . ($site_contact['name'] ?? 'WanderWay Travels');
+$meta_description = 'Request a customized vacation quote, plan your holiday itinerary, and get personal assistance from WanderWay Travels.';
 
 // Include common header
 require_once __DIR__ . '/includes/header.php';

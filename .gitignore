@@ -1,4 +1,5 @@
 config/live.php
 uploads/*
 !uploads/.gitkeep
+!uploads/.htaccess
 .vscode/

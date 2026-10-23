@@ -1,3 +1,4 @@
+<?php global $site_contact; ?>
     </main>
 
     <!-- Footer -->
@@ -12,7 +13,7 @@
                         <span>WanderWay</span> Travels
                     </div>
                     <p class="small text-secondary mb-3">
-                        Your trusted travel partner for unforgettable vacations, custom holiday packages, and seamless travel booking experiences worldwide.
+                        <?= htmlspecialchars($site_contact['tagline'] ?? 'Your trusted travel partner for unforgettable vacations.') ?>
                     </p>
                     <div class="d-flex gap-2">
                         <span class="badge bg-dark border border-secondary text-secondary">Trusted & Certified</span>
@@ -48,15 +49,19 @@
                     <ul class="list-unstyled small text-secondary">
                         <li class="mb-2 d-flex align-items-start">
                             <i class="bi bi-geo-alt text-accent me-2 mt-1"></i>
-                            <span>102 Sunshine Arcade, MG Road, New Delhi, India</span>
+                            <span><?= htmlspecialchars($site_contact['address']) ?></span>
                         </li>
                         <li class="mb-2 d-flex align-items-center">
                             <i class="bi bi-telephone text-accent me-2"></i>
-                            <span>+91 98765 43210</span>
+                            <a href="tel:<?= htmlspecialchars($site_contact['phone_clean']) ?>" class="text-secondary text-decoration-none">
+                                <?= htmlspecialchars($site_contact['phone']) ?>
+                            </a>
                         </li>
                         <li class="mb-2 d-flex align-items-center">
                             <i class="bi bi-envelope text-accent me-2"></i>
-                            <span>info@wanderwaytravels.com</span>
+                            <a href="mailto:<?= htmlspecialchars($site_contact['email']) ?>" class="text-secondary text-decoration-none">
+                                <?= htmlspecialchars($site_contact['email']) ?>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -68,7 +73,7 @@
             <!-- Copyright Notice -->
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start small text-secondary">
-                    &copy; <?= date('Y') ?> WanderWay Travels. All rights reserved.
+                    &copy; <?= date('Y') ?> <?= htmlspecialchars($site_contact['name']) ?>. All rights reserved.
                 </div>
                 <div class="col-md-6 text-center text-md-end small text-secondary mt-2 mt-md-0">
                     Designed for memorable journeys.
@@ -77,8 +82,8 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button (Placeholder number: 919876543210) -->
-    <a href="https://wa.me/919876543210?text=Hello%20WanderWay%20Travels%2C%20I%20would%20like%20to%20enquire%20about%20travel%20packages" 
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/<?= htmlspecialchars($site_contact['whatsapp']) ?>?text=<?= urlencode('Hello ' . $site_contact['name'] . ', I would like to enquire about travel packages') ?>" 
        class="whatsapp-float" 
        target="_blank" 
        rel="noopener noreferrer" 

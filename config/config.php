@@ -7,6 +7,18 @@ if (session_status() === PHP_SESSION_NONE) {
 // Set default timezone
 date_default_timezone_set('Asia/Kolkata');
 
+// Centralized Business Contact Details
+$site_contact = [
+    'name'          => 'WanderWay Travels',
+    'tagline'       => 'Handcrafted Travel Experiences & Tours',
+    'phone'         => '+91 98765 43210',
+    'phone_clean'   => '+919876543210',
+    'whatsapp'      => '919876543210',
+    'email'         => 'info@wanderwaytravels.com',
+    'address'       => '102 Sunshine Arcade, MG Road, New Delhi, 110001, India',
+    'working_hours' => 'Mon - Sat: 9:30 AM - 7:00 PM (Sunday Closed)'
+];
+
 // Detect local environment via HTTP_HOST
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 $is_local = ($host === 'localhost' || $host === '127.0.0.1' || strpos($host, 'localhost:') === 0 || strpos($host, '127.0.0.1:') === 0);

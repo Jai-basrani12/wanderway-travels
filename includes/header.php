@@ -1,8 +1,7 @@
 <?php
-// Default page title if not set
-if (!isset($page_title)) {
-    $page_title = 'WanderWay Travels - Discover Beautiful Destinations';
-}
+// Default SEO page title and meta description if not set
+$page_title = $page_title ?? 'WanderWay Travels - Discover Beautiful Destinations';
+$meta_description = $meta_description ?? 'Book handcrafted holiday tours, scenic vacation packages, and custom travel experiences with WanderWay Travels.';
 
 // Current page filename for active navbar state
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -13,6 +12,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title) ?></title>
+    <meta name="description" content="<?= htmlspecialchars($meta_description) ?>">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="<?= BASE_URL ?>assets/img/favicon.svg">
 
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
