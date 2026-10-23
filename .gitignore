@@ -1,0 +1,4 @@
+config/live.php
+uploads/*
+!uploads/.gitkeep
+.vscode/
