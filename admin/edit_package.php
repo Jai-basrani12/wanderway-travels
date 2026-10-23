@@ -41,6 +41,10 @@ $current_image = $package['image'];
 
 // Handle form submission
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    if (!verifyCsrf($_POST['csrf_token'] ?? '')) {
+        $errors[] = 'Security token verification failed. Please try again.';
+    }
+
     $title = trim($_POST['title'] ?? '');
     $destination = trim($_POST['destination'] ?? '');
     $price = trim($_POST['price'] ?? '');
@@ -224,6 +228,7 @@ $admin_name = $_SESSION['admin_username'] ?? 'Admin';
                     <div class="card border-0 shadow-sm rounded-4">
                         <div class="card-body p-4 p-md-5">
                             <form method="POST" action="" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
 
                                 <!-- Package Title -->
                                 <div class="mb-3">

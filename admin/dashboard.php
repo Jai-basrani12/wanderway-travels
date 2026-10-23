@@ -159,10 +159,14 @@ $admin_name = $_SESSION['admin_username'] ?? 'Admin';
                                     <span class="badge bg-light text-secondary border">All Caught Up</span>
                                 <?php endif; ?>
                             </div>
-                            <h3 class="fw-bold text-dark mb-1"><?= (int)$new_enquiries ?></h3>
+                            <h3 class="fw-bold text-dark mb-1">
+                                <a href="<?= BASE_URL ?>admin/enquiries.php?status=new" class="text-dark text-decoration-none hover-accent">
+                                    <?= (int)$new_enquiries ?>
+                                </a>
+                            </h3>
                             <p class="text-muted small mb-3">New customer enquiries awaiting response</p>
-                            <a href="<?= BASE_URL ?>admin/enquiries.php" class="btn btn-outline-danger btn-sm">
-                                View Enquiries <i class="bi bi-arrow-right ms-1"></i>
+                            <a href="<?= BASE_URL ?>admin/enquiries.php?status=new" class="btn btn-outline-danger btn-sm">
+                                View New Enquiries <i class="bi bi-arrow-right ms-1"></i>
                             </a>
                         </div>
                     </div>

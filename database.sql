@@ -24,11 +24,11 @@ CREATE TABLE IF NOT EXISTS `enquiries` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(100) NOT NULL,
   `phone` VARCHAR(20) NOT NULL,
-  `email` VARCHAR(150) NOT NULL,
+  `email` VARCHAR(150) NULL DEFAULT NULL,
   `package_id` INT NULL,
   `travel_date` DATE NULL,
   `persons` INT NULL,
-  `message` TEXT NOT NULL,
+  `message` TEXT NULL,
   `status` ENUM('new','contacted','closed') DEFAULT 'new',
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `fk_enquiries_package` FOREIGN KEY (`package_id`) REFERENCES `packages`(`id`) ON DELETE SET NULL

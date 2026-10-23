@@ -7,6 +7,12 @@ require_once __DIR__ . '/../includes/admin_check.php';
 
 // Handle POST actions (Toggle status and Delete)
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
+    if (!verifyCsrf($_POST['csrf_token'] ?? '')) {
+        $_SESSION['error_message'] = 'Security verification failed. Please try again.';
+        header("Location: " . BASE_URL . "admin/packages.php");
+        exit;
+    }
+
     $action = $_POST['action'] ?? '';
     $package_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
@@ -275,6 +281,7 @@ $admin_name = $_SESSION['admin_username'] ?? 'Admin';
 
                                                     <!-- Toggle Active/Inactive Form (POST) -->
                                                     <form method="POST" action="" class="d-inline">
+                                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
                                                         <input type="hidden" name="action" value="toggle">
                                                         <input type="hidden" name="id" value="<?= (int)$row['id'] ?>">
                                                         <button type="submit" class="btn btn-sm <?= ($row['is_active'] == 1) ? 'btn-outline-warning' : 'btn-outline-success' ?>" title="<?= ($row['is_active'] == 1) ? 'Deactivate Package' : 'Activate Package' ?>">
@@ -284,6 +291,7 @@ $admin_name = $_SESSION['admin_username'] ?? 'Admin';
 
                                                     <!-- Delete Form (POST) -->
                                                     <form method="POST" action="" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this package? This action cannot be undone.');">
+                                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
                                                         <input type="hidden" name="action" value="delete">
                                                         <input type="hidden" name="id" value="<?= (int)$row['id'] ?>">
                                                         <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete Package">

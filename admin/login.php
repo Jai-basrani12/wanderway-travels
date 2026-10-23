@@ -12,8 +12,11 @@ $error_message = '';
 
 // Handle form submission
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+    if (!verifyCsrf($_POST['csrf_token'] ?? '')) {
+        $error_message = 'Security token invalid or expired. Please refresh the page.';
+    } else {
+        $username = trim($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? '';
 
     if ($username === '' || $password === '') {
         $error_message = 'Invalid username or password.';
@@ -44,6 +47,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         // Generic error message on failure
         $error_message = 'Invalid username or password.';
     }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -93,6 +97,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
                         <!-- Login Form -->
                         <form method="POST" action="">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
                             <div class="mb-3">
                                 <label for="username" class="form-label small fw-semibold">Username</label>
                                 <div class="input-group">

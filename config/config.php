@@ -87,3 +87,24 @@ function deleteLocalImage(?string $image): void {
     }
 }
 
+/**
+ * Generate or get existing CSRF token for the current session.
+ */
+function csrfToken(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+/**
+ * Verify submitted CSRF token using timing-safe comparison.
+ */
+function verifyCsrf(?string $token): bool {
+    if (empty($_SESSION['csrf_token']) || empty($token)) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
+

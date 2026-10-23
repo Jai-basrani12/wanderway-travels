@@ -97,7 +97,7 @@ require_once __DIR__ . '/includes/header.php';
                                 <div class="d-flex align-items-center justify-content-between mt-auto">
                                     <div>
                                         <div class="package-price">
-                                            ₹<?= number_format((float)$pkg['price'], 2) ?>
+                                            ₹<?= number_format((float)$pkg['price']) ?>
                                             <span>/ person</span>
                                         </div>
                                     </div>
